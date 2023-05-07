@@ -1,3 +1,6 @@
+//input.js
+const { KEY_MATCHING } = require("./constants");
+
 // setup interface to handle user input from stdin
 
 // Stores the active TCP connection object.
@@ -17,23 +20,11 @@ const setupInput = function(conn) {
 
 const handleUserInput = function(key) {
   // \u0003 maps to ctrl+c input
+  if (KEY_MATCHING[key]) {
+    connection.write(KEY_MATCHING[key]);
+  }
   if (key === '\u0003') {
     process.exit();
-  }
-  if (key === 'a') {
-    connection.write("Move: left");
-  }
-  if (key === 's') {
-    connection.write("Move: down");
-  }
-  if (key === 'w') {
-    connection.write("Move: up");
-  }
-  if (key === 'd') {
-    connection.write("Move: right");
-  }
-  if (key === 'o') {
-    connection.write("Say: I am win!");
   }
 
 };
